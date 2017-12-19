@@ -1,0 +1,30 @@
+﻿@model Lab6.Models.FormModels.Home.AddFundsFormModel
+
+<form asp-controller="Home" asp-action="AddFunds"
+      data-ajax-begin="onBegin" data-ajax-complete="onComplete"
+      data-ajax-success="@ViewData["_AddFundsFormPartial.onSuccess"]" data-ajax-failure="@ViewData["_AddFundsFormPartial.onFailed"]"
+      data-ajax="true" data-ajax-method="POST">
+
+    <input type="hidden" asp-for="AccountId" value="@Model.AccountId" />
+    <input type="hidden" asp-for="IsSubtracting" value="@Model.IsSubtracting" />
+
+    <input type="text" asp-for="Value" />
+    <span asp-validation-for="Value" class="text-danger"></span>
+
+    <input type="submit" value="@(Model.IsSubtracting ? "Subtract" : "Add")" />
+    <div id="results"></div>
+
+</form>
+
+
+<script type="text/javascript">
+
+    function onBegin() {
+        $("#results").html("Loading...");
+    };
+    
+    function onComplete() {
+        $("#results").html("");
+    };
+
+</script>

@@ -1,0 +1,30 @@
+﻿@model Lab6.Models.ViewModels.Home.AddAccountViewModel
+@{
+    ViewBag.Title = "Add account";
+}
+
+@{
+    ViewData["_AddAccountFormPartial.onSuccess"] = "onAddAccountSuccess";
+    ViewData["_AddAccountFormPartial.onFailed"] = "onAddAccountFailed";
+}
+@Html.Partial("_AddAccountFormPartial", Model.AddAccountFormModel, ViewData)
+
+
+@section Scripts
+{
+    @Html.Partial("_ValidationScriptsPartial")
+
+    <script type="text/javascript">
+
+        function onAddAccountSuccess(context) {
+            console.log(context);
+
+            window.location.replace("@Url.Action("Account")?accountId=" + context.id);
+        };
+
+        function onAddAccountFailed(context) {
+            console.error(context);
+        };
+
+    </script>
+}

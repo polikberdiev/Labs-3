@@ -1,0 +1,50 @@
+﻿@model Lab6.Models.FormModels.Home.AddAccountFormModel
+
+<form asp-controller="Home" asp-action="AddAccount"
+      data-ajax-begin="onBegin" data-ajax-complete="onComplete"
+      data-ajax-success="@ViewData["_AddAccountFormPartial.onSuccess"]" data-ajax-failure="@ViewData["_AddAccountFormPartial.onFailed"]"
+      data-ajax="true" data-ajax-method="POST">
+    
+    <table class="table">
+        <tbody>
+        <tr>
+            <th scope="row"><label asp-for="OwnerUserId"></label></th>
+            <td>
+                <select type="text" asp-for="OwnerUserId" asp-items="@Model.OwnerUsersSelectList"></select>
+                <span asp-validation-for="OwnerUserId" class="text-danger"></span>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row"><label asp-for="AccountTypeId"></label></th>
+            <td>
+                <select type="text" asp-for="AccountTypeId" asp-items="@Model.AccountTypesSelectList"></select>
+                <span asp-validation-for="AccountTypeId" class="text-danger"></span>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row"><label asp-for="Number"></label></th>
+            <td>
+                <input type="text" asp-for="Number" />
+                <span asp-validation-for="Number" class="text-danger"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <input type="submit" value="Add" />
+    <div id="results"></div>
+
+</form>
+
+
+<script type="text/javascript">
+
+    function onBegin() {
+        $("#results").html("Loading...");
+    };
+    
+    function onComplete() {
+        $("#results").html("");
+    };
+
+</script>

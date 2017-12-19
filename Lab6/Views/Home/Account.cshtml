@@ -1,0 +1,66 @@
+﻿@using Lab6.Models.FormModels.Home
+@model Lab6.Models.ViewModels.Home.AccountViewModel
+@{
+    ViewBag.Title = $"{Model.Account.OwnerUser.Name}'s account";
+}
+
+@section Styles
+{
+    <style type="text/css">
+        .table { display: inline-block; }
+    </style>
+}
+
+<table class="table">
+    <tbody>
+    <tr>
+        <th scope="row">Account number</th>
+        <td>@Model.Account.Number</td>
+    </tr>
+    <tr>
+        <th scope="row">Owner name</th>
+        <td>@Model.Account.OwnerUser.Name</td>
+    </tr>
+    <tr>
+        <th scope="row">Account type</th>
+        <td>@Model.Account.AccountType.Name</td>
+    </tr>
+    <tr>
+        <th scope="row">Balance</th>
+        <td id="balance">@Model.Account.Balance</td>
+    </tr>
+    <tr>
+        <th scope="row">Bonus</th>
+        <td id="bonus">@Model.Account.Bonus</td>
+    </tr>
+    </tbody>
+</table>
+
+@{
+    ViewData["_AddFundsFormPartial.onSuccess"] = "onAddFundsSuccess";
+    ViewData["_AddFundsFormPartial.onFailed"] = "onAddFundsFailed";
+}
+@Html.Partial("_AddFundsFormPartial", new AddFundsFormModel { AccountId = Model.Account.Id }, ViewData)
+@Html.Partial("_AddFundsFormPartial", new AddFundsFormModel { AccountId = Model.Account.Id, IsSubtracting = true }, ViewData)
+
+
+
+@section Scripts
+{
+    @Html.Partial("_ValidationScriptsPartial")
+
+    <script type="text/javascript">
+
+        function onAddFundsSuccess(context) {
+            console.log(context);
+
+            $("#balance").text(context.balance);
+            $("#bonus").text(context.bonus);
+        };
+
+        function onAddFundsFailed(context) {
+            console.error(context);
+        };
+
+    </script>
+}

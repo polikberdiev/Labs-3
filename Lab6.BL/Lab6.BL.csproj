@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lab6.DAL\Lab6.DAL.csproj" />
+    <ProjectReference Include="..\Lab6.Domain\Lab6.Domain.csproj" />
+    <ProjectReference Include="..\Lab6.Utils\Lab6.Utils.csproj" />
+  </ItemGroup>
+
+</Project>
